@@ -5,8 +5,12 @@ class Upcase
   end
   
   def call(env)
-    status, headers, body = @app.call(env)
-    body.each &:upcase!
-    [status, headers, body]
+    @status, @headers, @body = @app.call(env)
+    [@status, @headers, self]
+  end
+  
+  def each(&block)
+    @body.each &:upcase!
+    @body.each &block
   end
 end
