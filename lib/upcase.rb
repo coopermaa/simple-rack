@@ -6,7 +6,7 @@ class Upcase
   
   def call(env)
     status, headers, body = @app.call(env)
-    body.each { |chunk| chunk.upcase! }
+    body.each &:upcase!
     [status, headers, body]
   end
 end
