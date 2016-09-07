@@ -1,4 +1,6 @@
 require "rack"
 require "greeter"
+require "upcase"
 
-Rack::Server.start app: Greeter.new, Port: 8080
+app = Upcase.new(Greeter.new)
+Rack::Server.start app: app, Port: 8080
