@@ -1,8 +1,15 @@
 require "rack"
 require "greeter"
 require "upcase"
+require "builder"
 
-# Reloader has a 10 seconds cooldown by default
-# Change it to 0, so that it picks up the changes immediately
-app = Rack::Reloader.new(Rack::ShowExceptions.new(Rack::Lint.new(Upcase.new(Greeter.new))), 0)
+app = Builder.new do
+  use Rack::Reloader, 0
+  use Rack::ShowExceptions
+  use Rack::Lint
+  use Upcase
+  
+  run Greeter.new
+end
+
 Rack::Server.start app: app, Port: 8080
