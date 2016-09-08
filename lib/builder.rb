@@ -1,6 +1,7 @@
 class Builder
   def initialize(&block)
     @use, @run, @to_app = [], nil, nil
+    instance_eval(&block) if block_given?
   end
 
   def use(middleware, *args, &block)
