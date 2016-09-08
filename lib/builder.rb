@@ -17,4 +17,8 @@ class Builder
     raise "missing run statement" unless @run
     @to_app = @use.reverse.inject(@run) { |a, p| p.call(a) }
   end
+  
+  def call(env)
+    to_app.call(env)
+  end
 end
