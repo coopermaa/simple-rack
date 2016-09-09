@@ -1,4 +1,3 @@
-require "rack"
 require "greeter"
 require "upcase"
 require "builder"
