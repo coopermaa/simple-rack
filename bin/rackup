@@ -6,5 +6,6 @@ require "rack"
 require "builder"
 
 app = eval "Builder.new {" + File.read("config.ru") + "}"
+port = ENV["PORT"] || 8080
 
-Rack::Server.start app: app, Port: 8080
+Rack::Server.start app: app, Port: port
