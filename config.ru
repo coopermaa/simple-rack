@@ -2,13 +2,9 @@ require "greeter"
 require "upcase"
 require "builder"
 
-app = Builder.new do
-  use Rack::Reloader, 0
-  use Rack::ShowExceptions
-  use Rack::Lint
-  use Upcase
-  
-  run Greeter.new
-end
+use Rack::Reloader, 0
+use Rack::ShowExceptions
+use Rack::Lint
+use Upcase
 
-Rack::Server.start app: app, Port: 8080
+run Greeter.new

@@ -3,5 +3,8 @@
 $LOAD_PATH.unshift("lib")
 
 require "rack"
+require "builder"
 
-eval File.read("config.ru")
+app = eval "Builder.new {" + File.read("config.ru") + "}"
+
+Rack::Server.start app: app, Port: 8080
