@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift("lib")
+
+require "rack"
+require "builder"
+
+app = eval "Builder.new {" + File.read("config.ru") + "}"
+port = ENV["PORT"] || 8080
+
+Rack::Server.start app: app, Port: port
